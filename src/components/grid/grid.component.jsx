@@ -2,22 +2,29 @@ import React from 'react'
 
 import './grid.styles.scss'
 
-const Grid = () => {
-  const gridStyle = {
+const Grid = ({ children }) => {
+  const gridStyles = {
     width: 300,
     height: 300,
-    gridTemplateColumns: '50%50%',
-    gridTemplateRows: '50%50%',
+    get gridTemplateColumns() {
+      const numberOfCells = children.length
+      const gridSize = numberOfCells / 2
+      let columns = ''
+
+      for (let i = 0; i < gridSize; i++) {
+        columns += `${100 / gridSize}%`
+      }
+
+      return columns
+    },
+    get gridTemplateRows() {
+      return this.gridTemplateColumns
+    }
   }
 
-  return (
-    <div className="grid" style={gridStyle}>
-      <div className="cell">1</div>
-      <div className="cell">2</div>
-      <div className="cell">3</div>
-      <div className="cell">4</div>
-    </div>
-  )
+  return <div className="grid" style={gridStyles}>
+    {children.map(cell => cell)} 
+  </div>
 }
 
 export default Grid
