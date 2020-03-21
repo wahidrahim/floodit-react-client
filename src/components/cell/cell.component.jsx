@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Cell = () => (
-  <div className="cell">cell</div>
+const Cell = ({ color }) => (
+  <div className="cell" style={{ background: color }}></div>
 )
 
 export default Cell
