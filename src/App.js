@@ -5,6 +5,10 @@ import Cell from './components/cell/cell.component'
 import './App.styles.scss'
 
 const getRandomColor = () => {
+  const getRandomIntInclusive = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+  
   const colors = [
     '#FF00E7',
     '#FF8100',
@@ -13,9 +17,7 @@ const getRandomColor = () => {
     '#00C5FF',
     '#A300FF'
   ]
-  const min = 0
-  const max = colors.length - 1
-  const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min
+  const randomIndex = getRandomIntInclusive(0, colors.length - 1)
 
   return colors[randomIndex]
 }
