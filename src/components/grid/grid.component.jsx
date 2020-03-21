@@ -1,5 +1,6 @@
 import React from 'react'
-import PropType from 'prop-types'
+
+import { perfectSquareNumberedCellComponents } from '../../utils/prop-validators'
 
 import './grid.styles.scss'
 
@@ -28,21 +29,10 @@ const Grid = ({ children }) => {
   )
 }
 
+
+
 Grid.propTypes = {
-  children: props => {
-    const hasIntegerSquareRoot = number => Number.isInteger(Math.sqrt(number))
-
-    if (!hasIntegerSquareRoot(props.children.length)) {
-      throw new Error('A square rootable number of Cells are needed')
-    }
-
-    PropType.checkPropTypes(
-      {
-        children: PropType.arrayOf(PropType.node)
-      },
-      props
-    )
-  }
+  children: perfectSquareNumberedCellComponents
 }
 
 export default Grid

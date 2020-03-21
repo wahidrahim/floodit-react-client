@@ -27,7 +27,6 @@ const App = () => {
   const cells = []
 
   for (let i = 0; i < numberOfCells; i++) {
-    console.log(getRandomColor())
     cells.push(<Cell key={i} color={getRandomColor()} />)
   }
 
