@@ -5,21 +5,19 @@ import './grid.styles.scss'
 
 const Grid = ({ children }) => {
   const gridStyles = {
-    width: 300,
-    height: 300,
     get gridTemplateColumns() {
       const numberOfCells = children.length
-      const gridSize = numberOfCells / Math.sqrt(numberOfCells)
+      const cellSize = numberOfCells / Math.sqrt(numberOfCells)
       let columns = ''
 
-      for (let i = 0; i < gridSize; i++) {
-        columns += `${100 / gridSize}%` // '50%50%', '25%25%25%25%', etc.
+      for (let i = 0; i < cellSize; i++) {
+        columns += `${100 / cellSize}%` // '50%50%', '25%25%25%25%', etc.
       }
 
       return columns
     },
     get gridTemplateRows() {
-      return this.gridTemplateColumns
+      return this.gridTemplateColumns // Same as columns, makes each Cell a square
     }
   }
 
@@ -34,8 +32,8 @@ Grid.propTypes = {
   children: props => {
     const hasIntegerSquareRoot = number => Number.isInteger(Math.sqrt(number))
 
-    if (!hasIntegerSquareRoot) {
-      throw new Error('not squareable grid')
+    if (!hasIntegerSquareRoot(props.children.length)) {
+      throw new Error('A square rootable number of Cells are needed')
     }
 
     PropType.checkPropTypes(
